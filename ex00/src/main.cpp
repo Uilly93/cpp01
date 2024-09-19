@@ -7,4 +7,5 @@ int main (){
 	randomChump(NRED "Stack_zombie" RESET);
 	new_zombie->announce();
 	delete new_zombie;
+	return 0;
 }
