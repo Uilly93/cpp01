@@ -1,0 +1,6 @@
+.obj
+*.d
+*.o
+megaphone
+phonebook
+account
