@@ -1,6 +1,5 @@
 .obj
 *.d
 *.o
-megaphone
-phonebook
-account
+zombie
+zombiesHorde
