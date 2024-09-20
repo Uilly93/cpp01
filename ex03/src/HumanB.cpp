@@ -1,11 +1,11 @@
 #include "../includes/HumanB.hpp"
 
 HumanB::HumanB(std::string name):_weapon(NULL), _name(name) {
-	std::cout << GREEN << _name << " just Spawned" << std::endl;
+	std::cout << GREEN << _name << " just Spawned" << RESET << std::endl;
 }
 
 HumanB::~HumanB(){
-	std::cout << RED << _name << " has been destroyed" << std::endl;
+	std::cout << RED << _name << " has been destroyed" RESET << std::endl;
 }
 
 void	HumanB::setname(std::string name){
@@ -19,7 +19,7 @@ void	HumanB::setWeapon(Weapon &weapon){
 
 void HumanB::attack(){
 	if(_weapon == NULL){
-		std::cout << _name << " has no weapon!" << std::endl;
+		std::cout << NRED << _name << RED <<" has no weapon!" << RESET << std::endl;
 		return ;
 	}
 	std::cout << NGREEN << _name << " attacks with their ";
