@@ -1,6 +1,6 @@
 NAME 		=	search_and_replace
-CC 			=	c++
-CFLAGS 		=	-Wall -Wextra -Werror -MMD -g3 -std=c++98
+CC 			=	clang++
+CFLAGS 		=	-Wall -Wextra -Werror -MMD -g3 -std=c++98 -gdwarf-4
 SRC_PATH	=	src/
 OBJ_PATH	=	.obj/
 SRC_NAME	=	main.cpp 
