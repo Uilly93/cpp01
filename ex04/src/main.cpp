@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include "../includes/colors.hpp"
 
 std::string	replace_word(std::string &content, std::string &search, std::string &replace){
 	std::string first_part = content.substr(0, content.find(search));
@@ -9,7 +10,10 @@ std::string	replace_word(std::string &content, std::string &search, std::string 
 
 int main(int ac, char **av){
 	if(ac != 4)
+	{
+		std::cerr << RED << "you need 3 arguments <file> <search> <replace>" << RESET << std::endl;
 		return 1;
+	}
 	std::string file_path(av[1]);
 	std::string search = av[2];
 	std::string replace = av[3];
@@ -18,13 +22,13 @@ int main(int ac, char **av){
 
 	if (!file1.is_open())
 	{
-		std::cout << "error open" << std::endl;
+		std::cerr << RED << "error open" << RESET << std::endl;
 		return 1;
 	}
 	std::ofstream file2(file_replace.c_str());
 	if (!file2.is_open()) 
 	{
-		std::cout << "error open" << std::endl;
+		std::cerr << RED << "error open" << RESET << std::endl;
 		file1.close();
 		return 1;
 	}
