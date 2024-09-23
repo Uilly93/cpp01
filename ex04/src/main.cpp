@@ -2,9 +2,9 @@
 #include <iostream>
 #include "../includes/colors.hpp"
 
-std::string	replace_word(std::string &content, std::string &search, std::string &replace){
-	std::string first_part = content.substr(0, content.find(search));
-	std::string secont_part = content.substr(content.find(search) + search.size());
+std::string	replace_word(std::size_t pos, std::string &content, std::string &search, std::string &replace){
+	std::string first_part = content.substr(0, content.find(search, pos));
+	std::string secont_part = content.substr(content.find(search, pos) + search.size());
 	return (first_part + replace + secont_part);
 }
 
@@ -18,33 +18,35 @@ int main(int ac, char **av){
 	std::string search = av[2];
 	std::string replace = av[3];
 	std::string file_replace(file_path + ".replace");
-	std::ifstream file1(file_path.c_str());
+	std::ifstream infile(file_path.c_str());
 
-	if (!file1.is_open())
+	if (!infile.is_open())
 	{
 		std::cerr << RED << "error open" << RESET << std::endl;
 		return 1;
 	}
-	std::ofstream file2(file_replace.c_str());
-	if (!file2.is_open()) 
+	std::ofstream outfile(file_replace.c_str());
+	if (!outfile.is_open()) 
 	{
 		std::cerr << RED << "error open" << RESET << std::endl;
-		file1.close();
+		infile.close();
 		return 1;
 	}
-	for(std::string content; std::getline(file1, content);)
+	for(std::string content; std::getline(infile, content);)
 	{
-		while(content.find(search) != std::string::npos){
+		std::size_t pos = 0;
+		while(content.find(search, pos) != std::string::npos){
 			if(search == replace || search.empty())
 				break ;
-			content = replace_word(content, search, replace);
+			content = replace_word(pos, content, search, replace);
+			pos = content.find(search, pos) + replace.size();
 		}
-		if(file1.eof())
-			file2 << content;
-		else 
-			file2 << content << std::endl;
+		if(infile.eof())
+			outfile << content;
+		else
+			outfile << content << std::endl;
 	}
-	file1.close();
-	file2.close();
+	infile.close();
+	outfile.close();
 	return 0;
 }
